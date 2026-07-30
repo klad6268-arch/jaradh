@@ -3,23 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>جراده - Garradah</title>
+    <title>جرادة - Garradah | تحميل تطبيقات وألعاب IPA و APK</title>
+    <!-- استدعاء ألوان وأيقونات مميزة -->
     <style>
         :root {
-            --bg-color: #121212;
-            --card-bg: #2a2a2a;
-            --button-bg: #4a4a4a;
-            --button-hover: #606060;
-            --text-color: #ffffff;
-            --accent-color: #888888;
+            --bg-color: #0d0d0d;
+            --card-bg: #181818;
+            --card-hover: #222222;
+            --primary: #3b82f6;
+            --text-main: #ffffff;
+            --text-sub: #a1a1aa;
+            --border: #27272a;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--bg-color);
-            color: var(--text-color);
+            color: var(--text-main);
             margin: 0;
-            padding: 20px;
+            padding: 20px 15px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -29,172 +35,372 @@
         .container {
             width: 100%;
             max-width: 600px;
-            text-align: center;
         }
 
-        .header {
+        /* وسائل التواصل في الأعلى */
+        .social-header {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
             margin-bottom: 20px;
         }
 
-        .header h1 {
-            font-size: 2.5rem;
-            margin: 10px 0 5px 0;
-            letter-spacing: 1px;
-        }
-
-        .header p {
-            color: var(--accent-color);
-            margin: 0;
-            font-size: 0.9rem;
-        }
-
-        .profile-img-container {
-            width: 100%;
-            max-width: 350px;
-            margin: 0 auto 25px auto;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.6);
-            border: 2px solid #333;
-        }
-
-        .profile-img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        /* شبكة الأزرار الستة */
-        .buttons-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .btn {
-            background-color: var(--button-bg);
-            color: white;
-            text-decoration: none;
-            padding: 18px 10px;
-            border-radius: 12px;
-            font-weight: bold;
-            font-size: 1rem;
-            transition: background-color 0.2s ease, transform 0.1s ease;
+        .social-btn {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid #555;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .social-btn:hover {
+            transform: scale(1.1);
+            background-color: var(--card-hover);
+        }
+
+        .social-btn svg {
+            width: 22px;
+            height: 22px;
+            fill: white;
+        }
+
+        /* هيدر الموقع مع الخلفية */
+        .hero-card {
+            position: relative;
+            background-color: rgba(24, 24, 24, 0.85);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 30px 20px;
+            text-align: center;
+            overflow: hidden;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url('https://i.ibb.co/L5hY0q1/0548e3f0f93cc316312debb3fec4f129.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.25;
+            filter: blur(4px);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .avatar {
+            width: 85px;
+            height: 85px;
+            border-radius: 20px;
+            border: 2px solid var(--primary);
+            object-fit: cover;
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+            margin-bottom: 12px;
+        }
+
+        .hero-card h1 {
+            margin: 0;
+            font-size: 2rem;
+            font-weight: 900;
+        }
+
+        .hero-card p {
+            margin: 8px 0 0;
+            color: var(--text-sub);
+            font-size: 0.9rem;
+        }
+
+        /* شبكة الأقسام */
+        .section-title {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: var(--text-sub);
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .grid-menu {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .menu-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 16px;
             cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: right;
         }
 
-        .btn:active {
-            transform: scale(0.98);
-            background-color: var(--button-hover);
+        .menu-card:hover {
+            border-color: var(--primary);
+            background-color: var(--card-hover);
+            transform: translateY(-2px);
         }
 
-        /* المنطقة الخاصة بالإدارة (غير مرئية للزوار العاديين) */
-        .admin-section {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #1e1e1e;
-            border-radius: 10px;
-            border: 1px dashed #444;
+        .menu-card h3 {
+            margin: 0;
+            font-size: 1rem;
+            color: var(--text-main);
         }
 
-        .admin-toggle-btn {
-            background: none;
+        .menu-card p {
+            margin: 4px 0 0;
+            font-size: 0.75rem;
+            color: var(--text-sub);
+        }
+
+        /* صفحات المحتوى (تفتح عند الضغط على القسم) */
+        .page-view {
+            display: none;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .back-btn {
+            background: #27272a;
+            color: #fff;
             border: none;
-            color: #555;
+            padding: 6px 14px;
+            border-radius: 8px;
             font-size: 0.8rem;
             cursor: pointer;
-            text-decoration: underline;
+            margin-bottom: 15px;
         }
 
-        .admin-content {
-            display: none;
-            margin-top: 15px;
+        /* كارت التطبيقات داخل القسم */
+        .item-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #121212;
+            border: 1px solid var(--border);
+            padding: 12px 15px;
+            border-radius: 14px;
+            margin-bottom: 10px;
         }
 
-        .admin-content input[type="file"], 
-        .admin-content input[type="password"] {
-            margin: 10px 0;
-            padding: 8px;
-            width: 80%;
-            border-radius: 5px;
-            border: 1px solid #444;
-            background: #222;
-            color: white;
+        .item-info h4 { margin: 0; font-size: 0.95rem; }
+        .item-info p { margin: 3px 0 0; font-size: 0.75rem; color: var(--text-sub); }
+
+        .download-btn {
+            background-color: var(--primary);
+            color: #000;
+            font-weight: bold;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .download-btn:disabled {
+            background-color: #52525b;
+            color: #fff;
+            cursor: not-allowed;
         }
 
         footer {
+            text-align: center;
+            color: #52525b;
+            font-size: 0.75rem;
             margin-top: auto;
-            padding: 20px 0 10px 0;
-            color: #666;
-            font-size: 0.8rem;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- الهيدر اسم الموقع -->
-        <div class="header">
-            <h1>جراده</h1>
-            <p>العاب وتطبيقات APK & IPA</p>
+        
+        <!-- 1. أزرار التيك توك واليوتيوب فوق -->
+        <div class="social-header">
+            <!-- TikTok -->
+            <a href="https://tiktok.com/@k_h19je" target="_blank" class="social-btn" title="تيك توك">
+                <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.29 0 .58.04.85.12V7.37a7.27 7.27 0 0 0-1-.07C5.08 7.3 2 10.38 2 14.18s3.08 6.88 6.88 6.88c3.8 0 6.88-3.08 6.88-6.88V9.13a8.16 8.16 0 0 0 3.83 1.01V6.69z"/></svg>
+            </a>
+            <!-- YouTube -->
+            <a href="https://www.youtube.com/@klihsd23" target="_blank" class="social-btn" title="يوتيوب">
+                <svg viewBox="0 0 24 24" style="fill:#ef4444;"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
         </div>
 
-        <!-- صورة الموقع -->
-        <div class="profile-img-container">
-            <!-- استبدل رابط الصورة أدناه برابط صورتك الشخصية -->
-            <img class="profile-img" src="https://via.placeholder.com/400x400/111111/ffffff?text=Garradah" alt="صورة الموقع">
-        </div>
+        <!-- الواجهة الرئيسية للموقع -->
+        <div id="mainView">
+            <div class="hero-card">
+                <div class="hero-bg"></div>
+                <div class="hero-content">
+                    <img src="https://i.ibb.co/L5hY0q1/0548e3f0f93cc316312debb3fec4f129.jpg" alt="Ghost" class="avatar">
+                    <h1>جرادة</h1>
+                    <p>تحميل تطبيقات وألعاب IPA و APK</p>
+                </div>
+            </div>
 
-        <!-- الخيارات الستة باللون الرصاصي -->
-        <div class="buttons-grid">
-            <a href="#ipa-apps" class="btn">تطبيقات ipa</a>
-            <a href="#ipa-games" class="btn">العاب ipa</a>
-            <a href="#apk-apps" class="btn">تطبيقات apk</a>
-            <a href="#apk-games" class="btn">العاب apk</a>
-            <a href="#accounts" class="btn">حساباتي</a>
-            <a href="#suggestions" class="btn">اقتراحاتكم</a>
-        </div>
+            <div class="section-title">
+                <span>اختر القسم</span>
+                <span style="cursor:pointer; color:var(--primary);" onclick="openAdmin()">لوحة المالك</span>
+            </div>
 
-        <!-- الخيار الخاص بك (لوحة إدارة رفع الملفات) -->
-        <div class="admin-section">
-            <button class="admin-toggle-btn" onclick="openAdmin()">دخول الإدارة (خاص)</button>
-            <div id="adminContent" class="admin-content">
-                <p style="font-size: 0.9rem; color: #aaa;">تحميل ورفع ملفات IPA / APK</p>
-                <input type="file" id="fileInput" accept=".apk,.ipa"><br>
-                <button class="btn" style="padding: 8px 15px; font-size: 0.8rem; margin: 0 auto;" onclick="uploadFile()">رفع الملف</button>
-                <p id="uploadStatus" style="font-size: 0.8rem; color: #4CAF50;"></p>
+            <!-- شبكة الخيارات الستة -->
+            <div class="grid-menu">
+                <div class="menu-card" onclick="openPage('ipaApps')">
+                    <h3>تطبيقات IPA</h3>
+                    <p>آيفون / iOS</p>
+                </div>
+                <div class="menu-card" onclick="openPage('ipaGames')">
+                    <h3>ألعاب IPA</h3>
+                    <p>آيفون / iOS</p>
+                </div>
+                <div class="menu-card" onclick="openPage('apkApps')">
+                    <h3>تطبيقات APK</h3>
+                    <p>أندرويد / Android</p>
+                </div>
+                <div class="menu-card" onclick="openPage('apkGames')">
+                    <h3>ألعاب APK</h3>
+                    <p>أندرويد / Android</p>
+                </div>
+                <div class="menu-card" onclick="openPage('accounts')">
+                    <h3>حساباتي</h3>
+                    <p>التواصل الاجتماعي</p>
+                </div>
+                <div class="menu-card" onclick="openPage('suggestions')">
+                    <h3>اقتراحاتكم</h3>
+                    <p>تواصل معنا</p>
+                </div>
             </div>
         </div>
+
+        <!-- 1. قسم تطبيقات IPA -->
+        <div id="ipaApps" class="page-view">
+            <button class="back-btn" onclick="goHome()">← رجوع للرئيسية</button>
+            <h2>تطبيقات IPA</h2>
+            <div class="item-card">
+                <div class="item-info">
+                    <h4>تطبيق تجريبي 1</h4>
+                    <p>النسخة: v1.0 · الحجم: 25MB</p>
+                </div>
+                <button class="download-btn" onclick="startTimer(this, 'https://github.com')">تحميل</button>
+            </div>
+        </div>
+
+        <!-- 2. قسم ألعاب IPA -->
+        <div id="ipaGames" class="page-view">
+            <button class="back-btn" onclick="goHome()">← رجوع للرئيسية</button>
+            <h2>ألعاب IPA</h2>
+            <div class="item-card">
+                <div class="item-info">
+                    <h4>لعبة تجريبية 1</h4>
+                    <p>النسخة: v2.1 · الحجم: 110MB</p>
+                </div>
+                <button class="download-btn" onclick="startTimer(this, 'https://github.com')">تحميل</button>
+            </div>
+        </div>
+
+        <!-- 3. قسم تطبيقات APK -->
+        <div id="apkApps" class="page-view">
+            <button class="back-btn" onclick="goHome()">← رجوع للرئيسية</button>
+            <h2>تطبيقات APK</h2>
+            <div class="item-card">
+                <div class="item-info">
+                    <h4>تطبيق أندرويد 1</h4>
+                    <p>النسخة: v1.5 · الحجم: 18MB</p>
+                </div>
+                <button class="download-btn" onclick="startTimer(this, 'https://github.com')">تحميل</button>
+            </div>
+        </div>
+
+        <!-- 4. قسم ألعاب APK -->
+        <div id="apkGames" class="page-view">
+            <button class="back-btn" onclick="goHome()">← رجوع للرئيسية</button>
+            <h2>ألعاب APK</h2>
+            <div class="item-card">
+                <div class="item-info">
+                    <h4>لعبة أندرويد 1</h4>
+                    <p>النسخة: v3.0 · الحجم: 85MB</p>
+                </div>
+                <button class="download-btn" onclick="startTimer(this, 'https://github.com')">تحميل</button>
+            </div>
+        </div>
+
+        <!-- 5. قسم حساباتي -->
+        <div id="accounts" class="page-view">
+            <button class="back-btn" onclick="goHome()">← رجوع للرئيسية</button>
+            <h2>حساباتي الرسمية</h2>
+            <p>تيك توك: <a href="https://tiktok.com/@k_h19je" target="_blank" style="color:var(--primary)">@k_h19je</a></p>
+            <p>يوتيوب: <a href="https://www.youtube.com/@klihsd23" target="_blank" style="color:var(--primary)">@klihsd23</a></p>
+        </div>
+
+        <!-- 6. قسم اقتراحاتكم -->
+        <div id="suggestions" class="page-view">
+            <button class="back-btn" onclick="goHome()">← رجوع للرئيسية</button>
+            <h2>أرسل اقتراحك</h2>
+            <p style="color:var(--text-sub); font-size:0.9rem;">يمكنك مراسلتنا باقتراحاتك للتطبيقات عبر حساب التيك توك.</p>
+        </div>
+
+        <footer>
+            جميع الحقوق محفوظة لموقع جرادة © <script>document.write(new Date().getFullYear())</script>
+        </footer>
+
     </div>
 
-    <footer>
-        &copy; جميع الحقوق محفوظة لموقع جراده
-    </footer>
-
+    <!-- البرمجة والتفاعل -->
     <script>
-        function openAdmin() {
-            const password = prompt("أدخل كلمة المرور لدخول لوحة رفع الملفات:");
-            // كلمة المرور الافتراضية هي 1234
-            if (password === "Kk11223344556677889900") {
-                document.getElementById("adminContent").style.display = "block";
-                alert("تم تسجيل الدخول بنجاح.");
-            } else if (password !== null) {
-                alert("كلمة المرور غير صحيحة!");
-            }
+        function openPage(pageId) {
+            document.getElementById('mainView').style.display = 'none';
+            const pages = document.querySelectorAll('.page-view');
+            pages.forEach(p => p.style.display = 'none');
+            document.getElementById(pageId).style.display = 'block';
         }
 
-        function uploadFile() {
-            const fileInput = document.getElementById("fileInput");
-            if (fileInput.files.length > 0) {
-                document.getElementById("uploadStatus").innerText = "تم اختيار الملف: " + fileInput.files[0].name;
-            } else {
-                alert("jarada.");
+        function goHome() {
+            const pages = document.querySelectorAll('.page-view');
+            pages.forEach(p => p.style.display = 'none');
+            document.getElementById('mainView').style.display = 'block';
+        }
+
+        // خاصية العد التنازلي للتحميل (5 ثوانٍ)
+        function startTimer(btn, url) {
+            let count = 5;
+            btn.disabled = true;
+            btn.innerText = `انتظر (${count})...`;
+
+            const timer = setInterval(() => {
+                count--;
+                if (count > 0) {
+                    btn.innerText = `انتظر (${count})...`;
+                } else {
+                    clearInterval(timer);
+                    btn.disabled = false;
+                    btn.innerText = "تحميل";
+                    window.location.href = url; // فتح رابط الملف
+                }
+            }, 1000);
+        }
+
+        // دخول لوحة الإدارة بكلمة سر
+        function openAdmin() {
+            const pass = prompt("أدخل كلمة مرور المالك:");
+            if (pass === "123456") {
+                alert("أهلاً بك! يمكنك إضافة الملفات عبر تعديل كود index.html في GitHub بسهولة.");
+            } else if (pass !== null) {
+                alert("كلمة المرور خاطئة!");
             }
         }
     </script>
